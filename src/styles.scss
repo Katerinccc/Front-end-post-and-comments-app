@@ -1,1 +1,23 @@
-/* You can add global styles to this file, and also import other style files */
+@import 'https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css';
+@import 'https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css';
+@import url(https://fonts.googleapis.com/css2?family=Nunito:wght@300&display=swap);
+
+:root{
+  --pinkSoft: #a657ae;
+  --blue: #0675b0e5;
+  --purple: #662c91;
+  --white: #F6F2FA;
+  --graySoft:#bdb8b8c9;
+  --gray: #2420207c;
+}
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+}
+
+html{
+  font-size: 62.5%;
+}
