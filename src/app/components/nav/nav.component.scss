@@ -1,0 +1,43 @@
+.navbar{
+  background-color: var(--purple);
+  height: 10vh;
+}
+
+.navbar a{
+  font-size: 2.5rem;
+}
+
+.navbar .nav-link{
+  font-size: 2rem;
+  cursor: pointer;
+  background-color: var(--white);
+  margin-left: 40px;
+  border-radius: 5px;
+  padding: 5px 10px;
+}
+
+.btn-submit{
+  background-color: var(--blue);
+  color: var(--white);
+}
+
+.close{
+  font-size: 2.5rem;
+}
+
+.modal-header h5{
+  color: var(--blue);
+  font-size: 1.8rem;
+}
+
+.form-group label{
+  font-size: 1.5rem;
+}
+
+.form-group input{
+  font-size: 1.5rem;
+}
+
+.modal-footer button{
+  font-size: 1.5rem;
+}
