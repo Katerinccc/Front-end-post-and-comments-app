@@ -1,37 +1,39 @@
 <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
 <div class="container bootstrap snippets bootdey">
-    <div class="col-sm-8">
-        <div class="panel panel-white post panel-shadow">
+    <div class="row">
+        <div *ngFor="let post of postList" class="panel panel-white post panel-shadow">
             <div class="post-heading">
                 <div class="pull-left image">
-                    <img src="https://bootdey.com/img/Content/user_1.jpg" class="img-circle avatar" alt="user profile image">
+                    <img src="../../../assets/avatar.png" class="img-circle avatar" alt="user profile image">
                 </div>
                 <div class="pull-left meta">
                     <div class="title h5">
-                        <a href="#"><b>Ryan Haywood </b></a>made a post.
+                        <a href="#"><b>{{ post.author }}</b></a>
                     </div>
                 </div>
             </div>
             <div class="post-description">
-                <p>Content title and info of the post</p>
+                <p>{{ post.title }}</p>
             </div>
             <div class="post-footer">
                 <div class="input-group">
-                    <input class="form-control" placeholder="Add a comment" type="text">
-                    <span class="input-group-addon">
-                        <a href="#"><i class="fa fa-edit"></i></a>
-                    </span>
+                    <input placeholder="Add a comment" type="text">
+                    <input placeholder="Add author" type="text">
+                    <button>Add</button>
                 </div>
-                <ul class="comments-list">
+                <ul *ngFor="let comment of post.comments" class="comments-list">
                   <li class="comment">
-                    <a class="pull-left" href="#">
-                        <img class="avatar" src="https://bootdey.com/img/Content/user_2.jpg" alt="avatar">
-                    </a>
                     <div class="comment-body">
+                      <div>
                         <div class="comment-heading">
-                            <h4 class="user">Gavino Free</h4>
+                          <h4 class="user">{{ comment.author }}</h4>
+                          <p>{{ comment.content }}</p>
                         </div>
-                        <p>Ok, cool.</p>
+                      </div>
+                      <div class="update-delete-comment">
+                        <a class="btn btn-ligth tooltips" data-placement="top" data-original-title="Edit"><i class="fa fa-pencil"></i> </a>
+                        <a class="btn btn-ligth tooltips" data-placement="top" data-original-title="Delete"><i class="fa fa-times"></i></a>
+                      </div>
                     </div>
                   </li>
                 </ul>
@@ -39,3 +41,6 @@
         </div>
     </div>
 </div>
+
+<!-- (click)="onOpenModal(employee, 'edit')"
+(click)="onOpenModal(employee, 'delete')" -->
