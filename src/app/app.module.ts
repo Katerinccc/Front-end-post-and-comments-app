@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavComponent } from './components/nav/nav.component';
-import { PostComponent } from './components/post/post.component';
+import { PostDetailComponent } from './components/postdetail/postdetail.component';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService } from './services/in-memory-data.service';
@@ -14,7 +14,7 @@ import { PostsComponent } from './components/posts/posts.component';
   declarations: [
     AppComponent,
     NavComponent,
-    PostComponent,
+    PostDetailComponent,
     PostsComponent
   ],
   imports: [

@@ -4,3 +4,17 @@ section{
   grid-gap: 30px;
 }
 
+@media (min-width: 1440px) {
+  section{
+    grid-template-columns: repeat(5, 1fr);
+    grid-gap: 20px;
+  }
+}
+
+@media (min-width: 1800px) {
+  section{
+    grid-template-columns: repeat(6, 1fr);
+    grid-gap: 20px;
+  }
+}
+

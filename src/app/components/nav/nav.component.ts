@@ -1,7 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { NgForm } from '@angular/forms';
-import { Post } from 'src/app/models/post';
 import { PostService } from 'src/app/services/post.service';
+import { PostCommand } from 'src/app/models/post-command';
 
 
 @Component({
@@ -34,14 +33,16 @@ export class NavComponent implements OnInit {
     const author = document.getElementById("author") as HTMLInputElement;
     const title = document.getElementById("title") as HTMLInputElement;
 
-    const newPost:Post = {
-      postId: (Math.random()*9999).toString(),
+    const newPost:PostCommand = {
+      postId: (Math.floor(Math.random()*9999)).toString(),
       title: title.value,
-      author: author.value,
-      comments: []
+      author: author.value
     }
 
     this.postService.addNewPost(newPost).subscribe();
+    author.value = "";
+    title.value = "";
+
   }
 
 }
