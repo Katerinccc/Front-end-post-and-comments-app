@@ -33,9 +33,9 @@
   margin-top: 20px;
 }
 
-.post .post-heading .meta .title a {
+.post .post-heading .meta .title p {
   color: black;
-  font-size: 1.7rem;
+  font-size: 2rem;
 }
 
 .post .post-description {
@@ -43,7 +43,7 @@
 }
 
 .post .post-description p {
-  font-size: 1.6rem;
+  font-size: 1.8rem;
 }
 
 .post .post-description .stats {
@@ -74,18 +74,21 @@
 }
 
 .post .post-footer .input-group input{
-  font-size: 1.4rem;
+  font-size: 1.6rem;
   border: 0.5px solid var(--graySoft);
-  width: 237px;
+  width: 100%;
+  height: 30px;
+  padding-left: 5px;
 }
 
 .post .post-footer .input-group button{
-  font-size: 1.3rem;
+  font-size: 1.6rem;
   padding-top: 2px;
   border: 0.5px solid var(--graySoft);
   background-color: var(--blue);
   color: var(--white);
   cursor: pointer;
+  padding-top: 8px;
 }
 
 .post .post-footer .comments-list {
@@ -102,16 +105,16 @@
 
 .post .post-footer .comments-list .comment .comment-heading {
   display: block;
-  width: 170px;
+  width: 250px;
 }
 
 .post .post-footer .comments-list .comment .comment-heading p{
   margin-top: 5px;
-  font-size: 1.3rem;
+  font-size: 1.5rem;
 }
 
 .post .post-footer .comments-list .comment .comment-heading .user {
-  font-size: 1.3rem;
+  font-size: 1.5rem;
   font-weight: bold;
   display: inline;
   margin-top: 0;
@@ -125,5 +128,23 @@
 }
 
 .post .post-footer .comments-list .comment .comment-body .update-delete-comment a{
-  font-size: 1.4rem;
+  font-size: 1.5rem;
+}
+
+button {
+  cursor: pointer;
+  margin-top: 20px;
+  background-color: var(--graySoft);
+  padding: 1rem;
+  border: 0.5px solid var(--graySoft);
+  border-radius: 4px;
+  font-size: 1rem;
+  font-size: 1.6rem;
+  color: var(--blue);
+  font-weight: bold;
+}
+button:hover {
+  background-color: var(--purple);
+  color: white;
+  border: 0.5px solid var(--graySoft);
 }

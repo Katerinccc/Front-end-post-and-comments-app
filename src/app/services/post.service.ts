@@ -15,7 +15,7 @@ export class PostService {
   private createPostUrl = 'http://localhost:8080/create/post';
 
   post: Post ={
-    postId: "",
+    id: "",
     title: "",
     author: "",
     comments: []
@@ -39,7 +39,7 @@ export class PostService {
       );
   }
 
-  addNewPost(post: PostCommand): Observable<Post>{
+  public addNewPost(post: PostCommand): Observable<Post>{
     console.log('addNewPost service', post)
     return this.http.post<PostResponse>(this.createPostUrl, post, this.httpOptions)
       .pipe(
@@ -48,6 +48,14 @@ export class PostService {
         }),
         catchError(this.handleError<any>('addNewPost'))
       );
+  }
+
+  public getPost(postId: number): Observable<Post> {
+    const url = `${this.postUrl}/${postId}`;
+    return this.http.get<Post>(url)
+    .pipe(
+      catchError(this.handleError<Post>(`getHero id=${postId}`))
+    );
   }
 
   private handleError<T>(operation = 'operation', result?: T) {

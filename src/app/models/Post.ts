@@ -1,7 +1,7 @@
 import { Comment } from "./comment"
 
 export interface Post{
-  postId: string,
+  id: string,
   title: string,
   author: string,
   comments: Comment[]
