@@ -25,9 +25,6 @@ export class PostService {
     comments: []
   };
 
-  private postCreated = new BehaviorSubject<PostResponse>(this.post);
-  postCreated$ = this.postCreated.asObservable();
-
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
@@ -54,9 +51,6 @@ export class PostService {
   public addNewPost(post: PostCommand): Observable<PostResponse>{
     return this.http.post<PostResponse>(this.createPostUrl, post, this.httpOptions)
       .pipe(
-        tap((newPost: PostResponse) =>  {
-          //this.postCreated.next(newPost);
-        }),
         catchError(this.handleError<any>('addNewPost'))
       );
   }
@@ -64,9 +58,6 @@ export class PostService {
   public addCommentToPost(newComment: Comment): Observable<PostResponse>{
     return this.http.post<PostResponse>(this.commentUrl, newComment, this.httpOptions)
     .pipe(
-      tap((newPost: PostResponse) =>  {
-        //this.postCreated.next(newPost);
-      }),
       catchError(this.handleError<any>('addCommentToPost'))
     );
   }

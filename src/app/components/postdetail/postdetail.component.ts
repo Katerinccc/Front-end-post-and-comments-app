@@ -6,6 +6,7 @@ import { PostResponse } from 'src/app/models/post-response';
 import { Comment } from 'src/app/models/comment';
 import { WebSocketService } from 'src/app/services/web-socket.service';
 import { WebSocketSubject } from 'rxjs/webSocket';
+import {v4 as uuid4} from 'uuid';
 
 @Component({
   selector: 'app-post-detail',
@@ -40,8 +41,8 @@ export class PostDetailComponent implements OnInit, OnDestroy {
   }
 
   getPost(): void {
-    const postId = Number(this.route.snapshot.paramMap.get('postId'));
-    this.postService.getPost(postId.toString())
+    const postId = this.route.snapshot.paramMap.get('postId') || '';
+    this.postService.getPost(postId)
       .subscribe(post => {
         this.post = post
         this.connectionToPostDetail(postId.toString());
@@ -49,13 +50,15 @@ export class PostDetailComponent implements OnInit, OnDestroy {
   }
 
   addNewComment(){
-    const postId = Number(this.route.snapshot.paramMap.get('postId'));
+    const postId =this.route.snapshot.paramMap.get('postId') || '';
     const author = document.getElementById("authorComment") as HTMLInputElement;
     const content = document.getElementById("content") as HTMLInputElement;
 
+    let newUuid = uuid4();
+
     const newComment:Comment = {
-      postId: postId.toString(),
-      commentId: (Math.floor(Math.random()*10000)).toString(),
+      postId: postId,
+      commentId: newUuid,
       author: author.value,
       content: content.value
     }
@@ -66,7 +69,7 @@ export class PostDetailComponent implements OnInit, OnDestroy {
   }
 
   public connectionToPostDetail(postId: string){
-    this.webSocket = this.socketService.connectionToPostDetail(postId.toString());
+    this.webSocket = this.socketService.connectionToPostDetail(postId);
     this.webSocket.subscribe((comment => {
       this.post.comments.unshift(comment)
     }))

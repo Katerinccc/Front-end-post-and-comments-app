@@ -18,8 +18,8 @@
             </div>
             <div class="post-footer">
                 <div class="input-group">
-                    <input placeholder="Add a comment" type="text" name="content" id="content">
-                    <input placeholder="Add author" type="text" name="authorComment" id="authorComment">
+                    <input placeholder="Add author" type="text" name="authorComment" id="authorComment" autocomplete="off">
+                    <input placeholder="Add a comment" type="text" name="content" id="content" autocomplete="off">
                     <button (click)="addNewComment()">Add</button>
                 </div>
                 <ul *ngFor="let comment of post.comments" class="comments-list">

@@ -20,8 +20,7 @@ export class PostsComponent implements OnInit, OnDestroy {
     private socketService: WebSocketService) { }
 
   ngOnInit(): void {
-      this.postService.postCreated$
-      .subscribe(_ => {this.getAllPost()});
+      this.getAllPost();
       this.connectionToMainSpace();
   }
 
@@ -31,13 +30,14 @@ export class PostsComponent implements OnInit, OnDestroy {
 
   public getAllPost(): void{
     this.postService.getAllPost()
-      .subscribe(allPost => this.postList = allPost);
+      .subscribe(allPost => this.postList = allPost.reverse());
   }
 
   public connectionToMainSpace(){
     this.webSocket = this.socketService.connectionToMainSpace();
     this.webSocket.subscribe((post => {
       this.postList.unshift(post);
+      console.log(post)
     }))
   }
 
