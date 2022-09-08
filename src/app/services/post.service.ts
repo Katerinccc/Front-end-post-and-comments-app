@@ -1,27 +1,31 @@
 import { Injectable } from '@angular/core';
-import { Post } from '../models/post';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of, BehaviorSubject } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import { PostCommand } from './../models/post-command';
 import { PostResponse } from '../models/post-response';
+import { Comment } from '../models/comment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PostService {
 
-  private postUrl = 'api/posts';
   private createPostUrl = 'http://localhost:8080/create/post';
+  private commentUrl = 'http://localhost:8080/add/comment';
+  private postById = "http://localhost:8081/beta/post";
+  private allPost = "http://localhost:8081/allposts";
 
-  post: Post ={
+
+  post: PostResponse ={
     id: "",
-    title: "",
+    postId: "",
     author: "",
+    title: "",
     comments: []
   };
 
-  private postCreated = new BehaviorSubject<Post>(this.post);
+  private postCreated = new BehaviorSubject<PostResponse>(this.post);
   postCreated$ = this.postCreated.asObservable();
 
   httpOptions = {
@@ -32,15 +36,22 @@ export class PostService {
   constructor(
     private http: HttpClient) { }
 
-  public getAllPost(): Observable<Post[]> {
-    return this.http.get<Post[]>(this.postUrl)
+  public getPost(postId: string): Observable<PostResponse> {
+    const url = `${this.postById}/${postId}`;
+    return this.http.get<PostResponse>(url)
+    .pipe(
+      catchError(this.handleError<PostResponse>(`getHero id=${postId}`))
+    );
+  }
+
+  public getAllPost(): Observable<PostResponse[]> {
+    return this.http.get<PostResponse[]>(this.allPost)
       .pipe(
-        catchError(this.handleError<Post[]>('getAllPost', []))
+        catchError(this.handleError<PostResponse[]>('getAllPost', []))
       );
   }
 
-  public addNewPost(post: PostCommand): Observable<Post>{
-    console.log('addNewPost service', post)
+  public addNewPost(post: PostCommand): Observable<PostResponse>{
     return this.http.post<PostResponse>(this.createPostUrl, post, this.httpOptions)
       .pipe(
         tap((newPost: PostResponse) =>  {
@@ -50,13 +61,16 @@ export class PostService {
       );
   }
 
-  public getPost(postId: number): Observable<Post> {
-    const url = `${this.postUrl}/${postId}`;
-    return this.http.get<Post>(url)
+  public addCommentToPost(newComment: Comment): Observable<PostResponse>{
+    return this.http.post<PostResponse>(this.commentUrl, newComment, this.httpOptions)
     .pipe(
-      catchError(this.handleError<Post>(`getHero id=${postId}`))
+      tap((newPost: PostResponse) =>  {
+        //this.postCreated.next(newPost);
+      }),
+      catchError(this.handleError<any>('addCommentToPost'))
     );
   }
+
 
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {

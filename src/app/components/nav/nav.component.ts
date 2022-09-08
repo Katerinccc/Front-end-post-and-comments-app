@@ -2,7 +2,6 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { PostService } from 'src/app/services/post.service';
 import { PostCommand } from 'src/app/models/post-command';
 
-
 @Component({
   selector: 'app-nav',
   templateUrl: './nav.component.html',
@@ -34,7 +33,7 @@ export class NavComponent implements OnInit {
     const title = document.getElementById("title") as HTMLInputElement;
 
     const newPost:PostCommand = {
-      postId: (Math.floor(Math.random()*9999)).toString(),
+      postId: (Math.floor(Math.random()*10000)).toString(),
       title: title.value,
       author: author.value
     }

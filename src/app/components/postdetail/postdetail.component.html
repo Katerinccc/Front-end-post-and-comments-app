@@ -1,4 +1,5 @@
 <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
+<button type="button" (click)="goBack()">Go back</button>
 <div class="bootstrap snippets bootdey">
     <div>
         <div class="panel panel-white post panel-shadow">
@@ -17,8 +18,8 @@
             </div>
             <div class="post-footer">
                 <div class="input-group">
-                    <input placeholder="Add a comment" type="text">
-                    <input placeholder="Add author" type="text">
+                    <input placeholder="Add a comment" type="text" name="content" id="content">
+                    <input placeholder="Add author" type="text" name="authorComment" id="authorComment">
                     <button (click)="addNewComment()">Add</button>
                 </div>
                 <ul *ngFor="let comment of post.comments" class="comments-list">
@@ -41,5 +42,4 @@
         </div>
     </div>
 </div>
-<button type="button" (click)="goBack()">Go back</button>
 

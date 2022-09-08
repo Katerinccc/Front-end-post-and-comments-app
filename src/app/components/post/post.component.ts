@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Post } from 'src/app/models/post';
+import { PostResponse } from 'src/app/models/post-response';
 
 @Component({
   selector: 'app-post',
@@ -8,8 +8,9 @@ import { Post } from 'src/app/models/post';
 })
 export class PostComponent implements OnInit {
 
-  @Input() post: Post ={
+  @Input() post: PostResponse ={
     id: "",
+    postId: "",
     title: "",
     author: "",
     comments: []

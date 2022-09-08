@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { Post } from 'src/app/models/post';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { PostService } from 'src/app/services/post.service';
+import { PostResponse } from 'src/app/models/post-response';
+import { WebSocketSubject } from 'rxjs/webSocket';
+import { WebSocketService } from 'src/app/services/web-socket.service';
 
 
 @Component({
@@ -8,20 +10,35 @@ import { PostService } from 'src/app/services/post.service';
   templateUrl: './posts.component.html',
   styleUrls: ['./posts.component.scss']
 })
-export class PostsComponent implements OnInit {
+export class PostsComponent implements OnInit, OnDestroy {
 
-  postList: Post[] = [];
+  webSocket?: WebSocketSubject<PostResponse>;
 
-  constructor(private postService: PostService) { }
+  postList: PostResponse[] = [];
+
+  constructor(private postService: PostService,
+    private socketService: WebSocketService) { }
 
   ngOnInit(): void {
       this.postService.postCreated$
       .subscribe(_ => {this.getAllPost()});
+      this.connectionToMainSpace();
+  }
+
+  ngOnDestroy(): void {
+    this.webSocket?.complete;
   }
 
   public getAllPost(): void{
     this.postService.getAllPost()
       .subscribe(allPost => this.postList = allPost);
+  }
+
+  public connectionToMainSpace(){
+    this.webSocket = this.socketService.connectionToMainSpace();
+    this.webSocket.subscribe((post => {
+      this.postList.unshift(post);
+    }))
   }
 
 }

@@ -1,8 +1,9 @@
+import { Comment } from "./comment"
+
 export interface PostResponse{
-  when: string,
-  uuid: string,
-  type: string,
-  title: string,
+  id: string,
+  postId: string,
   author: string,
-  aggregateName: string,
+  title: string,
+  comments: Comment[]
 }
