@@ -8,16 +8,14 @@ import { Comment } from '../models/comment';
 })
 export class WebSocketService {
 
-  url = webSocket('ws://localhost:8082');
-
   constructor() { }
 
   connectionToMainSpace(): WebSocketSubject<PostResponse>{
-    return webSocket('ws://localhost:8082/retrieve/mainSpace');
+    return webSocket('WSS://gamma-tor-06190.herokuapp.com/retrieve/mainSpace');
   }
 
-  connectionToPostDetail(postId: string): WebSocketSubject<Comment>{
-    return webSocket('ws://localhost:8082/retrieve/'+ postId);
+  connectionForPostDetail(postId: string): WebSocketSubject<Comment>{
+    return webSocket('WSS://gamma-tor-06190.herokuapp.com/retrieve/'+ postId);
   }
 
 

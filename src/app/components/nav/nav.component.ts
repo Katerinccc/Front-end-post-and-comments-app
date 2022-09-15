@@ -1,3 +1,4 @@
+import { StateService } from 'src/app/services/state.service';
 import { Component, OnInit } from '@angular/core';
 import { PostService } from 'src/app/services/post.service';
 import { PostCommand } from 'src/app/models/post-command';
@@ -10,7 +11,12 @@ import {v4 as uuid4} from 'uuid';
 })
 export class NavComponent implements OnInit {
 
-  constructor(private postService: PostService) { }
+  constructor(
+    private postService: PostService,
+    private state: StateService
+    ) { }
+
+  currentState = this.state.appState$.getValue();
 
   ngOnInit(): void {
   }

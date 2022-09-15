@@ -7,6 +7,7 @@ import { Comment } from 'src/app/models/comment';
 import { WebSocketService } from 'src/app/services/web-socket.service';
 import { WebSocketSubject } from 'rxjs/webSocket';
 import {v4 as uuid4} from 'uuid';
+import { StateService } from 'src/app/services/state.service';
 
 @Component({
   selector: 'app-post-detail',
@@ -29,11 +30,14 @@ export class PostDetailComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private postService: PostService,
     private location: Location,
-    private socketService: WebSocketService
+    private socketService: WebSocketService,
+    private state: StateService
   ) {}
 
   ngOnInit(): void {
-    this.getPost();
+    if(this.state.validateLogin()){
+      this.getPost();
+    }
   }
 
   ngOnDestroy(): void {
@@ -45,7 +49,7 @@ export class PostDetailComponent implements OnInit, OnDestroy {
     this.postService.getPost(postId)
       .subscribe(post => {
         this.post = post
-        this.connectionToPostDetail(postId.toString());
+        this.connectionForPostDetail(postId.toString());
       });
   }
 
@@ -68,8 +72,8 @@ export class PostDetailComponent implements OnInit, OnDestroy {
     content.value = "";
   }
 
-  public connectionToPostDetail(postId: string){
-    this.webSocket = this.socketService.connectionToPostDetail(postId);
+  public connectionForPostDetail(postId: string){
+    this.webSocket = this.socketService.connectionForPostDetail(postId);
     this.webSocket.subscribe((comment => {
       this.post.comments.unshift(comment)
     }))

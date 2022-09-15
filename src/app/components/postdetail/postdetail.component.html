@@ -1,45 +1,49 @@
+<nav id="nav-container" class="navbar navbar-expand-lg sticky-top">
+  <a class="navbar-brand" style="color:white;">SHARE YOUR THOUGHTS - POST APP</a>
+</nav>
 <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
-<button type="button" (click)="goBack()">Go back</button>
-<div class="bootstrap snippets bootdey">
-    <div>
-        <div class="panel panel-white post panel-shadow">
-            <div class="post-heading">
-                <div class="pull-left image">
-                    <img src="../../../assets/avatar.png" class="img-circle avatar" alt="user profile image">
-                </div>
-                <div class="pull-left meta">
-                    <div class="title h5">
-                        <p><b>{{ post.author }}</b></p>
-                    </div>
-                </div>
-            </div>
-            <div class="post-description">
-                <p>{{ post.title }}</p>
-            </div>
-            <div class="post-footer">
-                <div class="input-group">
-                    <input placeholder="Add author" type="text" name="authorComment" id="authorComment" autocomplete="off">
-                    <input placeholder="Add a comment" type="text" name="content" id="content" autocomplete="off">
-                    <button (click)="addNewComment()">Add</button>
-                </div>
-                <ul *ngFor="let comment of post.comments" class="comments-list">
-                  <li class="comment">
-                    <div class="comment-body">
-                      <div>
-                        <div class="comment-heading">
-                          <h4 class="user">{{ comment.author }}</h4>
-                          <p>{{ comment.content }}</p>
+<section class="post-detail-container">
+  <button class="go-back-button" type="button" (click)="goBack()">Go back</button>
+  <div class="bootstrap snippets bootdey">
+      <div>
+          <div class="panel panel-white post panel-shadow">
+              <div class="post-heading">
+                  <div class="pull-left image">
+                      <img src="../../../assets/avatar.png" class="img-circle avatar" alt="user profile image">
+                  </div>
+                  <div class="pull-left meta">
+                      <div class="title h5">
+                          <p><b>{{ post.author }}</b></p>
+                      </div>
+                  </div>
+              </div>
+              <div class="post-description">
+                  <p>{{ post.title }}</p>
+              </div>
+              <div class="post-footer">
+                  <div class="input-group">
+                      <input placeholder="Add author" type="text" name="authorComment" id="authorComment" autocomplete="off">
+                      <input placeholder="Add a comment" type="text" name="content" id="content" autocomplete="off">
+                      <button (click)="addNewComment()">Add</button>
+                  </div>
+                  <ul *ngFor="let comment of post.comments" class="comments-list">
+                    <li class="comment">
+                      <div class="comment-body">
+                        <div>
+                          <div class="comment-heading">
+                            <h4 class="user">{{ comment.author }}</h4>
+                            <p>{{ comment.content }}</p>
+                          </div>
+                        </div>
+                        <div class="update-delete-comment">
+                          <a class="btn btn-ligth tooltips" data-placement="top" data-original-title="Edit"><i class="fa fa-pencil"></i> </a>
+                          <a class="btn btn-ligth tooltips" data-placement="top" data-original-title="Delete"><i class="fa fa-times"></i></a>
                         </div>
                       </div>
-                      <div class="update-delete-comment">
-                        <a class="btn btn-ligth tooltips" data-placement="top" data-original-title="Edit"><i class="fa fa-pencil"></i> </a>
-                        <a class="btn btn-ligth tooltips" data-placement="top" data-original-title="Delete"><i class="fa fa-times"></i></a>
-                      </div>
-                    </div>
-                  </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</div>
-
+                    </li>
+                  </ul>
+              </div>
+          </div>
+      </div>
+  </div>
+</section>

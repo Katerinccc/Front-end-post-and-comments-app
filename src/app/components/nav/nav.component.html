@@ -3,8 +3,7 @@
   <div class="collapse navbar-collapse" id="navbarColor02">
     <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
-            <a class="nav-link" (click)="addPostModal()">Add Post
-              <span class="sr-only">(current)</span></a>
+            <button class="button-link" [disabled]="currentState.token===''" (click)="addPostModal()">Add Post</button>
         </li>
     </ul>
   </div>

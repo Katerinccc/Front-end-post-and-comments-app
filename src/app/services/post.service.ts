@@ -11,10 +11,10 @@ import { Comment } from '../models/comment';
 })
 export class PostService {
 
-  private createPostUrl = 'http://localhost:8080/create/post';
-  private commentUrl = 'http://localhost:8080/add/comment';
-  private postById = "http://localhost:8081/beta/post";
-  private allPost = "http://localhost:8081/allposts";
+  private createPostUrl = 'https://alpha-hollows-00755.herokuapp.com/create/post';
+  private commentUrl = 'https://alpha-hollows-00755.herokuapp.com/add/comment';
+  private postById = "https://beta-sleepy-77995.herokuapp.com/beta/post";
+  private allPost = "https://beta-sleepy-77995.herokuapp.com/allposts";
 
 
   post: PostResponse ={

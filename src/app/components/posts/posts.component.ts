@@ -1,3 +1,4 @@
+import { StateService } from './../../services/state.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { PostService } from 'src/app/services/post.service';
 import { PostResponse } from 'src/app/models/post-response';
@@ -16,28 +17,32 @@ export class PostsComponent implements OnInit, OnDestroy {
 
   postList: PostResponse[] = [];
 
-  constructor(private postService: PostService,
-    private socketService: WebSocketService) { }
+  constructor(
+    private postService: PostService,
+    private socketService: WebSocketService,
+    private state: StateService
+  ) { }
 
   ngOnInit(): void {
+    if(this.state.validateLogin()){
       this.getAllPost();
       this.connectionToMainSpace();
+    }
   }
 
   ngOnDestroy(): void {
     this.webSocket?.complete;
   }
 
-  public getAllPost(): void{
+  public getAllPost(): void {
     this.postService.getAllPost()
       .subscribe(allPost => this.postList = allPost.reverse());
   }
 
-  public connectionToMainSpace(){
+  public connectionToMainSpace(): void{
     this.webSocket = this.socketService.connectionToMainSpace();
     this.webSocket.subscribe((post => {
       this.postList.unshift(post);
-      console.log(post)
     }))
   }
 
