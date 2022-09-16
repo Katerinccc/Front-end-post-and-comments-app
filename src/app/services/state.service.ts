@@ -21,6 +21,7 @@ export class StateService {
   public validateLogin(): boolean {
     let validation = false;
     this.appState$.subscribe(currentState => {
+      console.info(currentState)
       if(!currentState.loggedIn){
         this.router.navigateByUrl("/login");
         return;

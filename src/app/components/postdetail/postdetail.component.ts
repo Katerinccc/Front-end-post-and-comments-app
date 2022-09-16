@@ -1,3 +1,4 @@
+import { AppState } from './../../models/app-state';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
@@ -40,6 +41,8 @@ export class PostDetailComponent implements OnInit, OnDestroy {
     }
   }
 
+  currentState:AppState = this.state.appState$.getValue();
+
   ngOnDestroy(): void {
     this.webSocket?.complete;
   }
@@ -67,7 +70,7 @@ export class PostDetailComponent implements OnInit, OnDestroy {
       content: content.value
     }
 
-    this.postService.addCommentToPost(newComment).subscribe();
+    this.postService.addCommentToPost(newComment, this.currentState.token).subscribe();
     author.value = "";
     content.value = "";
   }

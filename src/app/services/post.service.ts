@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, of, BehaviorSubject } from 'rxjs';
-import { catchError, map, tap } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import { PostCommand } from './../models/post-command';
 import { PostResponse } from '../models/post-response';
 import { Comment } from '../models/comment';
@@ -16,7 +16,6 @@ export class PostService {
   private postById = "https://beta-sleepy-77995.herokuapp.com/beta/post";
   private allPost = "https://beta-sleepy-77995.herokuapp.com/allposts";
 
-
   post: PostResponse ={
     id: "",
     postId: "",
@@ -25,13 +24,9 @@ export class PostService {
     comments: []
   };
 
-  httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-  };
-
-
   constructor(
-    private http: HttpClient) { }
+    private http: HttpClient
+  ) { }
 
   public getPost(postId: string): Observable<PostResponse> {
     const url = `${this.postById}/${postId}`;
@@ -48,15 +43,19 @@ export class PostService {
       );
   }
 
-  public addNewPost(post: PostCommand): Observable<PostResponse>{
-    return this.http.post<PostResponse>(this.createPostUrl, post, this.httpOptions)
+  public addNewPost(post: PostCommand, token: string): Observable<PostResponse>{
+    return this.http.post<PostResponse>(this.createPostUrl, post, {
+      headers: new HttpHeaders({  'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token})
+    })
       .pipe(
         catchError(this.handleError<any>('addNewPost'))
       );
   }
 
-  public addCommentToPost(newComment: Comment): Observable<PostResponse>{
-    return this.http.post<PostResponse>(this.commentUrl, newComment, this.httpOptions)
+  public addCommentToPost(newComment: Comment, token: string): Observable<PostResponse>{
+    return this.http.post<PostResponse>(this.commentUrl, newComment, {
+      headers: new HttpHeaders({  'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token})
+    })
     .pipe(
       catchError(this.handleError<any>('addCommentToPost'))
     );

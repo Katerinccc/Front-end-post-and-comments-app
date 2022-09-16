@@ -2,7 +2,8 @@ import { StateService } from 'src/app/services/state.service';
 import { Component, OnInit } from '@angular/core';
 import { PostService } from 'src/app/services/post.service';
 import { PostCommand } from 'src/app/models/post-command';
-import {v4 as uuid4} from 'uuid';
+import { v4 as uuid4 } from 'uuid';
+import { AppState } from 'src/app/models/app-state';
 
 @Component({
   selector: 'app-nav',
@@ -16,7 +17,7 @@ export class NavComponent implements OnInit {
     private state: StateService
     ) { }
 
-  currentState = this.state.appState$.getValue();
+  currentState:AppState = this.state.appState$.getValue();
 
   ngOnInit(): void {
   }
@@ -47,7 +48,8 @@ export class NavComponent implements OnInit {
       author: author.value
     }
 
-    this.postService.addNewPost(newPost).subscribe();
+    this.postService.addNewPost(newPost, this.currentState.token).subscribe();
+
     author.value = "";
     title.value = "";
 
