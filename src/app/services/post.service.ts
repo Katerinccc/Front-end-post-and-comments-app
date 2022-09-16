@@ -11,8 +11,8 @@ import { Comment } from '../models/comment';
 })
 export class PostService {
 
-  private createPostUrl = 'https://alpha-hollows-00755.herokuapp.com/create/post';
-  private commentUrl = 'https://alpha-hollows-00755.herokuapp.com/add/comment';
+  private createPostUrl = 'https://alpha-1177.herokuapp.com/create/post';
+  private commentUrl = 'https://alpha-1177.herokuapp.com/add/comment';
   private postById = "https://beta-sleepy-77995.herokuapp.com/beta/post";
   private allPost = "https://beta-sleepy-77995.herokuapp.com/allposts";
 
