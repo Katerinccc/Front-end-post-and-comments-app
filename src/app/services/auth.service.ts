@@ -16,8 +16,7 @@ export class AuthService {
     private http: HttpClient
   ) { }
 
-  //loginUrl = "https://alpha-hollows-00711.herokuapp.com/auth/login";
-  loginUrl = "http://localhost:8080/auth/login";
+  loginUrl = "https://alpha-hollows-00711.herokuapp.com/auth/login";
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })

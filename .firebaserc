@@ -1,14 +1,5 @@
 {
   "projects": {
     "default": "posts-and-comments-e5fc6"
-  },
-  "targets": {
-    "posts-and-comments-e5fc6": {
-      "hosting": {
-        "front-end-post-app": [
-          "posts-and-comments-e5fc6"
-        ]
-      }
-    }
   }
 }
